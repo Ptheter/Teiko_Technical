@@ -1,5 +1,6 @@
 from pathlib import Path
 import sqlite3
+import os
 
 import pandas as pd
 
@@ -12,7 +13,12 @@ BASE_DIR = Path(__file__).resolve().parent
 
 INPUT_FILE = BASE_DIR / "data" / "cell-count-cleaned.csv"
 SCHEMA_FILE = BASE_DIR / "schema.sql"
-DATABASE_FILE = BASE_DIR / "cell-count.db"
+DATABASE_FILE = Path(
+    os.environ.get(
+        "TEIKO_DB_PATH",
+        BASE_DIR / "cell-count.db",
+    )
+)
 
 CELL_COUNT_COLUMNS = [
     "b_cell",

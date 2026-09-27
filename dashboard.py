@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+import os
 import sqlite3
 import subprocess
 
@@ -13,7 +14,7 @@ import streamlit as st
 # ---------------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent
-DB_PATH = BASE_DIR / "cell-count.db"
+DB_PATH = Path("/tmp/teiko_cell-count.db")
 OUTPUT_DIR = BASE_DIR / "output"
 
 
@@ -22,6 +23,7 @@ def database_is_ready():
         return False
 
     connection = sqlite3.connect(DB_PATH)
+
     try:
         tables = pd.read_sql_query(
             """
@@ -32,7 +34,13 @@ def database_is_ready():
             """,
             connection,
         )
-        return set(tables["name"]) == {"subjects", "samples", "cell_counts"}
+
+        return set(tables["name"]) == {
+            "subjects",
+            "samples",
+            "cell_counts",
+        }
+
     finally:
         connection.close()
 
@@ -45,6 +53,10 @@ if not database_is_ready():
         [sys.executable, str(BASE_DIR / "load_data.py")],
         check=True,
         cwd=BASE_DIR,
+        env={
+            **os.environ,
+            "TEIKO_DB_PATH": str(DB_PATH),
+        },
     )
 
 
