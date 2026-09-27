@@ -1,5 +1,6 @@
 from pathlib import Path
 import sqlite3
+import subprocess
 
 import pandas as pd
 import plotly.express as px
@@ -13,6 +14,13 @@ import streamlit as st
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = BASE_DIR / "cell-count.db"
 OUTPUT_DIR = BASE_DIR / "output"
+
+if not DB_PATH.exists():
+    subprocess.run(
+        ["python3", str(BASE_DIR / "load_data.py")],
+        check=True,
+        cwd=BASE_DIR,
+    )
 
 
 # ---------------------------------------------------------
