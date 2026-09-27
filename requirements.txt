@@ -1,0 +1,8 @@
+cat > requirements.txt <<'EOF'
+pandas
+numpy
+scipy
+statsmodels
+plotly
+streamlit
+EOF

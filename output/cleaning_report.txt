@@ -1,0 +1,38 @@
+CELL COUNT DATA CLEANING REPORT
+==============================
+
+Input file: data/cell-count.csv
+Rows loaded: 10500
+Columns loaded: 15
+
+MISSING VALUES
+--------------
+response: 1422
+
+CATEGORICAL VALUES
+------------------
+sex: no unexpected values
+response: no unexpected values
+
+NUMERIC VALIDATION
+------------------
+All numeric values passed validation.
+
+IDENTIFIER VALIDATION
+---------------------
+No duplicate sample IDs found.
+
+CELL COUNT VALIDATION
+---------------------
+No missing cell counts.
+
+No completely duplicated rows found.
+
+FINAL SUMMARY
+-------------
+Rows before cleaning: 10500
+Rows after cleaning:  10500
+Rows removed:         0
+Missing response values retained: 1422
+
+Cleaning completed successfully.
