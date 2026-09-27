@@ -1,4 +1,5 @@
 from pathlib import Path
+import sys
 import sqlite3
 import subprocess
 
@@ -41,7 +42,7 @@ if not database_is_ready():
         DB_PATH.unlink()
 
     subprocess.run(
-        ["python3", str(BASE_DIR / "load_data.py")],
+        [sys.executable, str(BASE_DIR / "load_data.py")],
         check=True,
         cwd=BASE_DIR,
     )
