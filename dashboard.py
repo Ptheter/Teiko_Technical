@@ -8,35 +8,44 @@ import streamlit as st
 
 
 # ---------------------------------------------------------
-# Paths
+# Database setup
 # ---------------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = BASE_DIR / "cell-count.db"
 OUTPUT_DIR = BASE_DIR / "output"
 
-if not DB_PATH.exists():
+
+def database_is_ready():
+    if not DB_PATH.exists():
+        return False
+
+    connection = sqlite3.connect(DB_PATH)
+    try:
+        tables = pd.read_sql_query(
+            """
+            SELECT name
+            FROM sqlite_master
+            WHERE type = 'table'
+              AND name IN ('subjects', 'samples', 'cell_counts')
+            """,
+            connection,
+        )
+        return set(tables["name"]) == {"subjects", "samples", "cell_counts"}
+    finally:
+        connection.close()
+
+
+if not database_is_ready():
+    if DB_PATH.exists():
+        DB_PATH.unlink()
+
     subprocess.run(
         ["python3", str(BASE_DIR / "load_data.py")],
         check=True,
         cwd=BASE_DIR,
     )
 
-
-# ---------------------------------------------------------
-# Page configuration
-# ---------------------------------------------------------
-
-st.set_page_config(
-    page_title="Cell Count Analysis",
-    page_icon="🧬",
-    layout="wide",
-)
-
-
-# ---------------------------------------------------------
-# Database connection
-# ---------------------------------------------------------
 
 @st.cache_resource
 def get_connection():
