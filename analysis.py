@@ -2,7 +2,6 @@ from pathlib import Path
 import sqlite3
 import csv
 import pandas as pd
-import matplotlib.pyplot as plt
 import plotly.express as px
 from scipy.stats import mannwhitneyu
 from statsmodels.stats.multitest import multipletests
