@@ -405,7 +405,9 @@ Then run:
 make dashboard
 ```
 
-to launch the interactive dashboard. In order to view the dashboard, ctrl+click the URL link for Local URL. 
+to launch the interactive dashboard.
+
+To view the dashboard, go to https://teikotechnical-kfayrucj3gzdoa22b5wvwg.streamlit.app/
 
 The database is regenerated from the cleaned CSV during `make pipeline`, ensuring that downstream analysis is based on the current cleaned input data.
 
