@@ -59,14 +59,7 @@ if not database_is_ready():
         },
     )
 
-
-@st.cache_resource
-def get_connection():
-    return sqlite3.connect(DB_PATH, check_same_thread=False)
-
-
-conn = get_connection()
-
+conn = sqlite3.connect(DB_PATH, check_same_thread=False)
 
 # ---------------------------------------------------------
 # Database queries
