@@ -1,4 +1,4 @@
-# Teiko Take-Home Technical Assignment
+# Teiko Technical
 
 ## Overview
 
