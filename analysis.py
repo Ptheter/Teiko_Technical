@@ -473,7 +473,7 @@ def save_results(rows):
                 int(row[1]),
                 row[2],
                 int(row[3]),
-                f"{row[4]:.2f}"
+                f"{row[4]:.2f}%"
             ])
 
 
